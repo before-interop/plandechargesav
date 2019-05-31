@@ -1,10 +1,11 @@
-<definitions name="PlanChargeFtthSavService" targetNamespace="http://interop-fibre.fr"
+<wsdl:definitions name="PlanChargeFtthSavService" 
+		     targetNamespace="http://interop-fibre.fr"
              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-             xmlns:="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
              xmlns:tns="http://interop-fibre.fr"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
              xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
-    <types>
+    <wsdl:types>
         <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified"
                    targetNamespace="http://interop-fibre.fr" xmlns:xs="http://www.w3.org/2001/XMLSchema">
             <xs:element name="ConsultationRdvRequete">
@@ -178,121 +179,121 @@
             <xs:element name="ReportRDVReponse" nillable="true" type="tns:ReportRDVReponse"/>
             <xs:element name="ReservationCreneauReponse" nillable="true" type="tns:ReservationCreneauReponse"/>
         </xs:schema>
-    </types>
-    <message name="reportRDVResponse">
-        <part element="tns:ReportRDVReponse" name="ReportRDVReponse"/>
-    </message>
-    <message name="reportRDV">
-        <part element="tns:ReportRDVRequete" name="parameters"/>
-    </message>
-    <message name="reservationCreneau">
-        <part element="tns:ReservationCreneauRequete" name="parameters"/>
-    </message>
-    <message name="reservationCreneauResponse">
-        <part element="tns:ReservationCreneauReponse" name="ReservationCreneauReponse"/>
-    </message>
-    <message name="rechercheCreneauxLibresResponse">
-        <part element="tns:RechercheCreneauxLibresReponse" name="RechercheCreneauxLibresReponse"/>
-    </message>
-    <message name="rechercheCreneauxLibres">
-        <part element="tns:RechercheCreneauxLibresRequete" name="parameters"/>
-    </message>
-    <message name="consultationRdvResponse">
-        <part element="tns:ConsultationRdvReponse" name="ConsultationRdvReponse"/>
-    </message>
-    <message name="consultationRdv">
-        <part element="tns:ConsultationRdvRequete" name="parameters"/>
-    </message>
-    <message name="InfoErreurTypeMessage">
-        <part name="fault" element="tns:InfoErreurType"/>
-    </message>
-    <message name="EnteteTypeMessage">
-        <part name="EnteteType" element="tns:EnteteType"/>
-    </message>
-    <portType name="PlanChargeFtthSav">
-        <operation name="rechercheCreneauxLibres">
-            <input message="tns:rechercheCreneauxLibres" name="rechercheCreneauxLibres"/>
-            <output message="tns:rechercheCreneauxLibresResponse" name="rechercheCreneauxLibresResponse"/>
-            <fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
-        </operation>
-        <operation name="consultationRdv">
-            <input message="tns:consultationRdv" name="consultationRdv"/>
-            <output message="tns:consultationRdvResponse" name="consultationRdvResponse"/>
-            <fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
-        </operation>
-        <operation name="reportRDV">
-            <input message="tns:reportRDV" name="reportRDV"/>
-            <output message="tns:reportRDVResponse" name="reportRDVResponse"/>
-            <fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
-        </operation>
-        <operation name="reservationCreneau">
-            <input message="tns:reservationCreneau" name="reservationCreneau"/>
-            <output message="tns:reservationCreneauResponse" name="reservationCreneauResponse"/>
-            <fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
-        </operation>
-    </portType>
-    <binding name="PlanChargeFtthSavServiceSoapBinding" type="tns:PlanChargeFtthSav">
+    </wsdl:types>
+    <wsdl:message name="reportRDVResponse">
+        <wsdl:part element="tns:ReportRDVReponse" name="ReportRDVReponse"/>
+    </wsdl:message>
+    <wsdl:message name="reportRDV">
+        <wsdl:part element="tns:ReportRDVRequete" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="reservationCreneau">
+        <wsdl:part element="tns:ReservationCreneauRequete" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="reservationCreneauResponse">
+        <wsdl:part element="tns:ReservationCreneauReponse" name="ReservationCreneauReponse"/>
+    </wsdl:message>
+    <wsdl:message name="rechercheCreneauxLibresResponse">
+        <wsdl:part element="tns:RechercheCreneauxLibresReponse" name="RechercheCreneauxLibresReponse"/>
+    </wsdl:message>
+    <wsdl:message name="rechercheCreneauxLibres">
+        <wsdl:part element="tns:RechercheCreneauxLibresRequete" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="consultationRdvResponse">
+        <wsdl:part element="tns:ConsultationRdvReponse" name="ConsultationRdvReponse"/>
+    </wsdl:message>
+    <wsdl:message name="consultationRdv">
+        <wsdl:part element="tns:ConsultationRdvRequete" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="InfoErreurTypeMessage">
+        <wsdl:part name="fault" element="tns:InfoErreurType"/>
+    </wsdl:message>
+    <wsdl:message name="EnteteTypeMessage">
+        <wsdl:part name="EnteteType" element="tns:EnteteType"/>
+    </wsdl:message>
+    <wsdl:portType name="PlanChargeFtthSav">
+        <wsdl:operation name="rechercheCreneauxLibres">
+            <wsdl:input message="tns:rechercheCreneauxLibres" name="rechercheCreneauxLibres"/>
+            <wsdl:output message="tns:rechercheCreneauxLibresResponse" name="rechercheCreneauxLibresResponse"/>
+            <wsdl:fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
+        </wsdl:operation>
+        <wsdl:operation name="consultationRdv">
+            <wsdl:input message="tns:consultationRdv" name="consultationRdv"/>
+            <wsdl:output message="tns:consultationRdvResponse" name="consultationRdvResponse"/>
+            <wsdl:fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
+        </wsdl:operation>
+        <wsdl:operation name="reportRDV">
+            <wsdl:input message="tns:reportRDV" name="reportRDV"/>
+            <wsdl:output message="tns:reportRDVResponse" name="reportRDVResponse"/>
+            <wsdl:fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
+        </wsdl:operation>
+        <wsdl:operation name="reservationCreneau">
+            <wsdl:input message="tns:reservationCreneau" name="reservationCreneau"/>
+            <wsdl:output message="tns:reservationCreneauResponse" name="reservationCreneauResponse"/>
+            <wsdl:fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PlanChargeFtthSavServiceSoapBinding" type="tns:PlanChargeFtthSav">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <operation name="rechercheCreneauxLibres">
+        <wsdl:operation name="rechercheCreneauxLibres">
             <soap:operation soapAction="" style="document"/>
-            <input name="rechercheCreneauxLibres">
+            <wsdl:input name="rechercheCreneauxLibres">
                 <soap:body use="literal"/>
-                <soap:header message="tns:EnteteTypeMessage" part="EnteteType"/>
-            </input>
-            <output name="rechercheCreneauxLibresResponse">
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="rechercheCreneauxLibresResponse">
                 <soap:body use="literal"/>
-                <soap:header message="tns:EnteteTypeMessage" part="EnteteType"/>
-            </output>
-            <fault name="rdvErreur">
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="rdvErreur">
                 <soap:fault name="rdvErreur" use="literal"/>
-            </fault>
-        </operation>
-        <operation name="consultationRdv">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultationRdv">
             <soap:operation soapAction="" style="document"/>
-            <input name="consultationRdv">
+            <wsdl:input name="consultationRdv">
                 <soap:body use="literal"/>
-                <soap:header message="tns:EnteteTypeMessage" part="EnteteType"/>
-            </input>
-            <output name="consultationRdvResponse">
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="consultationRdvResponse">
                 <soap:body use="literal"/>
-                <soap:header message="tns:EnteteTypeMessage" part="EnteteType"/>
-            </output>
-            <fault name="rdvErreur">
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="rdvErreur">
                 <soap:fault name="rdvErreur" use="literal"/>
-            </fault>
-        </operation>
-        <operation name="reportRDV">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="reportRDV">
             <soap:operation soapAction="" style="document"/>
-            <input name="reportRDV">
+            <wsdl:input name="reportRDV">
                 <soap:body use="literal"/>
-                <soap:header message="tns:EnteteTypeMessage" part="EnteteType"/>
-            </input>
-            <output name="reportRDVResponse">
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="reportRDVResponse">
                 <soap:body use="literal"/>
-                <soap:header message="tns:EnteteTypeMessage" part="EnteteType"/>
-            </output>
-            <fault name="rdvErreur">
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="rdvErreur">
                 <soap:fault name="rdvErreur" use="literal"/>
-            </fault>
-        </operation>
-        <operation name="reservationCreneau">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="reservationCreneau">
             <soap:operation soapAction="" style="document"/>
-            <input name="reservationCreneau">
+            <wsdl:input name="reservationCreneau">
                 <soap:body use="literal"/>
-                <soap:header message="tns:EnteteTypeMessage" part="EnteteType"/>
-            </input>
-            <output name="reservationCreneauResponse">
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="reservationCreneauResponse">
                 <soap:body use="literal"/>
-                <soap:header message="tns:EnteteTypeMessage" part="EnteteType"/>
-            </output>
-            <fault name="rdvErreur">
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="rdvErreur">
                 <soap:fault name="rdvErreur" use="literal"/>
-            </fault>
-        </operation>
-    </binding>
-    <service name="PlanChargeFtthSavService">
-        <port binding="tns:PlanChargeFtthSavServiceSoapBinding" name="PlanChargeFtthSavPort">
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PlanChargeFtthSavService">
+        <wsdl:port binding="tns:PlanChargeFtthSavServiceSoapBinding" name="PlanChargeFtthSavPort">
             <soap:address location="http://localhost:8080/sav-ftth/services/rdvFtthSav"/>
-        </port>
-    </service>
-</definitions>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
