@@ -46,7 +46,6 @@
             <xs:element name="ReservationCreneauRequete">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="typeIntervention" type="tns:typeInterventionType"/>
                         <xs:element name="natureProduit" type="tns:natureProduitType"/>
                         <xs:element name="segmentMarche" type="tns:segmentMarcheType"/>
                         <xs:element name="codeInsee" type="xs:string"/>
@@ -59,7 +58,7 @@
                     <xs:sequence>
                         <xs:element name="versionWS" type="xs:string"/>
                         <xs:element name="horodatageRequete" type="xs:dateTime"/>
-                        <xs:element name="horodatageReponse" type="xs:dateTime"/>
+                        <xs:element minOccurs="0" nillable="true" name="horodatageReponse" type="xs:dateTime"/>
                         <xs:element name="sirenOC" type="xs:string"/>
                         <xs:element name="sirenOI" type="xs:string"/>
                     </xs:sequence>
@@ -67,8 +66,7 @@
             </xs:element>
             <xs:complexType name="RechercheCreneauxLibresReponse">
                 <xs:sequence>
-                    <xs:element name="codeReponse" type="tns:codeReponseType"/>
-                    <xs:element minOccurs="0" name="listeCreneau" nillable="true" type="tns:listeCreneauType"/>
+                    <xs:element name="listeCreneau" type="tns:listeCreneauType"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="InfoErreurType">
@@ -76,20 +74,12 @@
                     <xs:sequence>
                         <xs:element name="codeErreur" type="xs:int"/>
                         <xs:element name="messageErreur" type="xs:string"/>
-                        <xs:element minOccurs="0" name="detailErreur" nillable="true" type="tns:DetailErreurType"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:complexType name="DetailErreurType">
-                <xs:sequence>
-                    <xs:element name="libelle" type="xs:string"/>
-                    <xs:element name="detail" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
             <xs:complexType name="listeCreneauType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="occCreneau" nillable="true"
-                                type="tns:CreneauType"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="occCreneau" nillable="true" type="tns:CreneauType"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="CreneauType">
@@ -101,11 +91,10 @@
             </xs:complexType>
             <xs:complexType name="ConsultationRdvReponse">
                 <xs:sequence>
-                    <xs:element name="codeReponse" type="tns:codeReponseType"/>
                     <xs:element name="idRendezVous" type="xs:string"/>
                     <xs:element name="dateDebut" type="xs:dateTime"/>
                     <xs:element name="dateFin" type="xs:dateTime"/>
-                    <xs:element name="codeInsee" type="xs:int"/>
+                    <xs:element name="codeInsee" type="xs:string"/>
                     <xs:element name="typeIntervention" type="tns:typeInterventionType"/>
                     <xs:element minOccurs="0" name="natureProduit" nillable="true" type="tns:natureProduitType"/>
                     <xs:element minOccurs="0" name="segmentMarche" nillable="true" type="tns:segmentMarcheType"/>
@@ -115,18 +104,15 @@
             </xs:complexType>
             <xs:complexType name="ReportRDVReponse">
                 <xs:sequence>
-                    <xs:element name="codeReponse" type="tns:codeReponseType"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="ReservationCreneauReponse">
                 <xs:sequence>
-                    <xs:element name="codeReponse" type="tns:codeReponseType"/>
-                    <xs:element minOccurs="0" name="idRendezvous" nillable="true" type="xs:string"/>
+                    <xs:element name="idRendezvous" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:simpleType name="typeInterventionType">
                 <xs:restriction base="xs:string">
-                    <xs:enumeration value="P"/>
                     <xs:enumeration value="S"/>
                     <xs:enumeration value="E"/>
                 </xs:restriction>
@@ -173,8 +159,7 @@
                     <xs:enumeration value="NOUVEAU_RDV"/>
                 </xs:restriction>
             </xs:simpleType>
-            <xs:element name="RechercheCreneauxLibresReponse" nillable="true"
-                        type="tns:RechercheCreneauxLibresReponse"/>
+            <xs:element name="RechercheCreneauxLibresReponse" nillable="true" type="tns:RechercheCreneauxLibresReponse"/>
             <xs:element name="ConsultationRdvReponse" nillable="true" type="tns:ConsultationRdvReponse"/>
             <xs:element name="ReportRDVReponse" nillable="true" type="tns:ReportRDVReponse"/>
             <xs:element name="ReservationCreneauReponse" nillable="true" type="tns:ReservationCreneauReponse"/>
@@ -204,7 +189,7 @@
     <wsdl:message name="consultationRdv">
         <wsdl:part element="tns:ConsultationRdvRequete" name="parameters"/>
     </wsdl:message>
-    <wsdl:message name="InfoErreurTypeMessage">
+    <wsdl:message name="InfoErreurTypeException">
         <wsdl:part name="fault" element="tns:InfoErreurType"/>
     </wsdl:message>
     <wsdl:message name="EnteteTypeMessage">
@@ -214,22 +199,22 @@
         <wsdl:operation name="rechercheCreneauxLibres">
             <wsdl:input message="tns:rechercheCreneauxLibres" name="rechercheCreneauxLibres"/>
             <wsdl:output message="tns:rechercheCreneauxLibresResponse" name="rechercheCreneauxLibresResponse"/>
-            <wsdl:fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
+            <wsdl:fault message="tns:InfoErreurTypeException" name="rdvErreur"/>
         </wsdl:operation>
         <wsdl:operation name="consultationRdv">
             <wsdl:input message="tns:consultationRdv" name="consultationRdv"/>
             <wsdl:output message="tns:consultationRdvResponse" name="consultationRdvResponse"/>
-            <wsdl:fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
+            <wsdl:fault message="tns:InfoErreurTypeException" name="rdvErreur"/>
         </wsdl:operation>
         <wsdl:operation name="reportRDV">
             <wsdl:input message="tns:reportRDV" name="reportRDV"/>
             <wsdl:output message="tns:reportRDVResponse" name="reportRDVResponse"/>
-            <wsdl:fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
+            <wsdl:fault message="tns:InfoErreurTypeException" name="rdvErreur"/>
         </wsdl:operation>
         <wsdl:operation name="reservationCreneau">
             <wsdl:input message="tns:reservationCreneau" name="reservationCreneau"/>
             <wsdl:output message="tns:reservationCreneauResponse" name="reservationCreneauResponse"/>
-            <wsdl:fault message="tns:InfoErreurTypeMessage" name="rdvErreur"/>
+            <wsdl:fault message="tns:InfoErreurTypeException" name="rdvErreur"/>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="PlanChargeFtthSavServiceSoapBinding" type="tns:PlanChargeFtthSav">
