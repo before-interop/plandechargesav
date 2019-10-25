@@ -1,267 +1,284 @@
-<wsdl:definitions name="PlanChargeFtthSavService" targetNamespace="http://interop-fibre.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://interop-fibre.fr" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
-  <wsdl:types>
-    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://interop-fibre.fr" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:element name="ConsultationRdvRequete">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entete" type="tns:EnteteType"/>
-            <xs:element name="idRendezVous" type="xs:string"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="RechercheCreneauxLibresRequete">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entete" type="tns:EnteteType"/>
-            <xs:element name="typeIntervention" type="tns:typeInterventionType"/>
-            <xs:element name="natureProduit" type="tns:natureProduitType"/>
-            <xs:element name="segmentMarche" type="tns:segmentMarcheType"/>
-            <xs:element minOccurs="0" name="technicalId" nillable="true" type="xs:string"/>
-            <xs:element minOccurs="0" name="commercialId" nillable="true" type="xs:string"/>
-            <xs:element name="codeInsee" type="xs:string"/>
-            <xs:element name="dateDebut" type="xs:dateTime"/>
-            <xs:element name="dateFin" type="xs:dateTime"/>
-            <xs:element name="defectPrelocalization" type="tns:defectPrelocalizationType"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="ReportRDVRequete">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entete" type="tns:EnteteType"/>
-            <xs:element name="typeIntervention" type="tns:typeInterventionType"/>
-            <xs:element name="natureProduit" type="tns:natureProduitType"/>
-            <xs:element name="segmentMarche" type="tns:segmentMarcheType"/>
-            <xs:element name="codeInsee" type="xs:string"/>
-            <xs:element name="idRendezvous" type="xs:string"/>
-            <xs:element name="natureReport" type="tns:natureReportType"/>
-            <xs:element name="idCreneau" type="xs:string"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="ReservationCreneauRequete">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entete" type="tns:EnteteType"/>
-            <xs:element name="typeIntervention" type="tns:typeInterventionType"/>
-            <xs:element name="natureProduit" type="tns:natureProduitType"/>
-            <xs:element name="segmentMarche" type="tns:segmentMarcheType"/>
-            <xs:element name="codeInsee" type="xs:string"/>
-            <xs:element name="idCreneau" type="xs:string"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:complexType name="EnteteType">
-        <xs:sequence>
-          <xs:element name="versionWS" type="xs:string"/>
-          <xs:element name="horodatageRequete" type="xs:dateTime"/>
-          <xs:element name="horodatageReponse" type="xs:dateTime"/>
-          <xs:element name="sirenOC" type="xs:string"/>
-          <xs:element name="sirenOI" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="RechercheCreneauxLibresReponse">
-        <xs:sequence>
-          <xs:element name="entete" type="tns:EnteteType"/>
-          <xs:element name="infoErreur" type="tns:InfoErreurType"/>
-          <xs:element name="codeReponse" type="tns:codeReponseType"/>
-          <xs:element minOccurs="0" name="listeCreneau" nillable="true" type="tns:listeCreneauType"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="InfoErreurType">
-        <xs:sequence>
-          <xs:element name="codeErreur" type="xs:int"/>
-          <xs:element minOccurs="0" name="detailErreur" nillable="true" type="tns:DetailErreurType"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="DetailErreurType">
-        <xs:sequence>
-          <xs:element name="libelle" type="xs:string"/>
-          <xs:element name="detail" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="listeCreneauType">
-        <xs:sequence>
-          <xs:element maxOccurs="unbounded" minOccurs="0" name="occCreneau" nillable="true" type="tns:CreneauType"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="CreneauType">
-        <xs:sequence>
-          <xs:element name="dateDebut" type="xs:dateTime"/>
-          <xs:element name="dateFin" type="xs:dateTime"/>
-          <xs:element name="idOI" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="ConsultationRdvReponse">
-        <xs:sequence>
-          <xs:element name="entete" type="tns:EnteteType"/>
-          <xs:element name="infoErreur" type="tns:InfoErreurType"/>
-          <xs:element name="codeReponse" type="tns:codeReponseType"/>
-          <xs:element name="idRendezVous" type="xs:string"/>
-          <xs:element name="dateDebut" type="xs:dateTime"/>
-          <xs:element name="dateFin" type="xs:dateTime"/>
-          <xs:element name="codeInsee" type="xs:int"/>
-          <xs:element name="typeIntervention" type="tns:typeInterventionType"/>
-          <xs:element minOccurs="0" name="natureProduit" nillable="true" type="tns:natureProduitType"/>
-          <xs:element minOccurs="0" name="segmentMarche" nillable="true" type="tns:segmentMarcheType"/>
-          <xs:element name="statutRendezVous" type="tns:statutRendezVousType"/>
-          <xs:element minOccurs="0" name="referencePrestationPrise" nillable="true" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="ReportRDVReponse">
-        <xs:sequence>
-          <xs:element name="entete" type="tns:EnteteType"/>
-          <xs:element name="infoErreur" type="tns:InfoErreurType"/>
-          <xs:element name="codeReponse" type="tns:codeReponseType"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="ReservationCreneauReponse">
-        <xs:sequence>
-          <xs:element name="entete" type="tns:EnteteType"/>
-          <xs:element name="infoErreur" type="tns:InfoErreurType"/>
-          <xs:element name="codeReponse" type="tns:codeReponseType"/>
-          <xs:element minOccurs="0" name="idRendezvous" nillable="true" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:simpleType name="typeInterventionType">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="P"/>
-          <xs:enumeration value="S"/>
-          <xs:enumeration value="E"/>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType name="natureProduitType">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="FTTH_ACCES"/>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType name="segmentMarcheType">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="ENTREPRISE"/>
-          <xs:enumeration value="GP"/>
-          <xs:enumeration value="OPERATEUR"/>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType name="defectPrelocalizationType">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="PTO"/>
-          <xs:enumeration value="RACCO PALIER"/>
-          <xs:enumeration value="PBO"/>
-          <xs:enumeration value="PM-PBO"/>
-          <xs:enumeration value="PM"/>
-          <xs:enumeration value="HORIZONTALE RESEAU"/>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType name="codeReponseType">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="OK"/>
-          <xs:enumeration value="KO"/>
-          <xs:enumeration value="NA"/>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType name="statutRendezVousType">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="CREE"/>
-          <xs:enumeration value="CONFIRME"/>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType name="natureReportType">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="REPORT_RDV_RESERVE"/>
-          <xs:enumeration value="REPORT_RDV_CONFIRME"/>
-          <xs:enumeration value="NOUVEAU_RDV"/>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:element name="RechercheCreneauxLibresReponse" nillable="true" type="tns:RechercheCreneauxLibresReponse"/>
-      <xs:element name="ConsultationRdvReponse" nillable="true" type="tns:ConsultationRdvReponse"/>
-      <xs:element name="ReportRDVReponse" nillable="true" type="tns:ReportRDVReponse"/>
-      <xs:element name="ReservationCreneauReponse" nillable="true" type="tns:ReservationCreneauReponse"/>
-    </xs:schema>
-  </wsdl:types>
-  <wsdl:message name="reportRDVResponse">
-    <wsdl:part element="tns:ReportRDVReponse" name="ReportRDVReponse"/>
-  </wsdl:message>
-  <wsdl:message name="reportRDV">
-    <wsdl:part element="tns:ReportRDVRequete" name="parameters"/>
-  </wsdl:message>
-  <wsdl:message name="reservationCreneau">
-    <wsdl:part element="tns:ReservationCreneauRequete" name="parameters"/>
-  </wsdl:message>
-  <wsdl:message name="reservationCreneauResponse">
-    <wsdl:part element="tns:ReservationCreneauReponse" name="ReservationCreneauReponse"/>
-  </wsdl:message>
-  <wsdl:message name="rechercheCreneauxLibresResponse">
-    <wsdl:part element="tns:RechercheCreneauxLibresReponse" name="RechercheCreneauxLibresReponse"/>
-  </wsdl:message>
-  <wsdl:message name="rechercheCreneauxLibres">
-    <wsdl:part element="tns:RechercheCreneauxLibresRequete" name="parameters"/>
-  </wsdl:message>
-  <wsdl:message name="consultationRdvResponse">
-    <wsdl:part element="tns:ConsultationRdvReponse" name="ConsultationRdvReponse"/>
-  </wsdl:message>
-  <wsdl:message name="consultationRdv">
-    <wsdl:part element="tns:ConsultationRdvRequete" name="parameters"/>
-  </wsdl:message>
-  <wsdl:portType name="PlanChargeFtthSav">
-    <wsdl:operation name="rechercheCreneauxLibres">
-      <wsdl:input message="tns:rechercheCreneauxLibres" name="rechercheCreneauxLibres"/>
-      <wsdl:output message="tns:rechercheCreneauxLibresResponse" name="rechercheCreneauxLibresResponse"/>
-    </wsdl:operation>
-    <wsdl:operation name="consultationRdv">
-      <wsdl:input message="tns:consultationRdv" name="consultationRdv"/>
-      <wsdl:output message="tns:consultationRdvResponse" name="consultationRdvResponse"/>
-    </wsdl:operation>
-    <wsdl:operation name="reportRDV">
-      <wsdl:input message="tns:reportRDV" name="reportRDV"/>
-      <wsdl:output message="tns:reportRDVResponse" name="reportRDVResponse"/>
-    </wsdl:operation>
-    <wsdl:operation name="reservationCreneau">
-      <wsdl:input message="tns:reservationCreneau" name="reservationCreneau"/>
-      <wsdl:output message="tns:reservationCreneauResponse" name="reservationCreneauResponse"/>
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="PlanChargeFtthSavServiceSoapBinding" type="tns:PlanChargeFtthSav">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="rechercheCreneauxLibres">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="rechercheCreneauxLibres">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="rechercheCreneauxLibresResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="consultationRdv">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="consultationRdv">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="consultationRdvResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="reportRDV">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="reportRDV">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="reportRDVResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="reservationCreneau">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="reservationCreneau">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="reservationCreneauResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="PlanChargeFtthSavService">
-    <wsdl:port binding="tns:PlanChargeFtthSavServiceSoapBinding" name="PlanChargeFtthSavPort">
-      <soap:address location="http://localhost:8080/sav-ftth/services/rdvFtthSav"/>
-    </wsdl:port>
-  </wsdl:service>
+<wsdl:definitions name="PlanChargeFtthSavService" 
+		     targetNamespace="http://interop-fibre.fr"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://interop-fibre.fr"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified"
+                   targetNamespace="http://interop-fibre.fr" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="ConsultationRdvRequete">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="idRendezVous" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RechercheCreneauxLibresRequete">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="typeIntervention" type="tns:typeInterventionType"/>
+                        <xs:element name="natureProduit" type="tns:natureProduitType"/>
+                        <xs:element name="segmentMarche" type="tns:segmentMarcheType"/>
+                        <xs:element minOccurs="0" name="technicalId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="commercialId" nillable="true" type="xs:string"/>
+                        <xs:element name="codeInsee" type="xs:string"/>
+                        <xs:element name="dateDebut" type="xs:dateTime"/>
+                        <xs:element name="dateFin" type="xs:dateTime"/>
+                        <xs:element name="defectPrelocalization" type="tns:defectPrelocalizationType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ReportRDVRequete">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="typeIntervention" type="tns:typeInterventionType"/>
+                        <xs:element name="natureProduit" type="tns:natureProduitType"/>
+                        <xs:element name="segmentMarche" type="tns:segmentMarcheType"/>
+                        <xs:element name="codeInsee" type="xs:string"/>
+                        <xs:element name="idRendezvous" type="xs:string"/>
+                        <xs:element name="natureReport" type="tns:natureReportType"/>
+                        <xs:element name="idCreneau" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ReservationCreneauRequete">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="natureProduit" type="tns:natureProduitType"/>
+                        <xs:element name="segmentMarche" type="tns:segmentMarcheType"/>
+                        <xs:element name="codeInsee" type="xs:string"/>
+                        <xs:element name="idCreneau" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EnteteType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="versionWS" type="xs:string"/>
+                        <xs:element name="horodatageRequete" type="xs:dateTime"/>
+                        <xs:element minOccurs="0" nillable="true" name="horodatageReponse" type="xs:dateTime"/>
+                        <xs:element name="sirenOC" type="xs:string"/>
+                        <xs:element name="sirenOI" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="RechercheCreneauxLibresReponse">
+                <xs:sequence>
+                    <xs:element name="listeCreneau" type="tns:listeCreneauType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="InfoErreurType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="codeErreur" type="xs:int"/>
+                        <xs:element name="messageErreur" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="listeCreneauType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="occCreneau" nillable="true" type="tns:CreneauType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CreneauType">
+                <xs:sequence>
+                    <xs:element name="dateDebut" type="xs:dateTime"/>
+                    <xs:element name="dateFin" type="xs:dateTime"/>
+                    <xs:element name="idOI" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ConsultationRdvReponse">
+                <xs:sequence>
+                    <xs:element name="idRendezVous" type="xs:string"/>
+                    <xs:element name="dateDebut" type="xs:dateTime"/>
+                    <xs:element name="dateFin" type="xs:dateTime"/>
+                    <xs:element name="codeInsee" type="xs:string"/>
+                    <xs:element name="typeIntervention" type="tns:typeInterventionType"/>
+                    <xs:element minOccurs="0" name="natureProduit" nillable="true" type="tns:natureProduitType"/>
+                    <xs:element minOccurs="0" name="segmentMarche" nillable="true" type="tns:segmentMarcheType"/>
+                    <xs:element name="statutRendezVous" type="tns:statutRendezVousType"/>
+                    <xs:element minOccurs="0" name="referencePrestationPrise" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ReportRDVReponse">
+                <xs:sequence>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ReservationCreneauReponse">
+                <xs:sequence>
+                    <xs:element name="idRendezvous" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="typeInterventionType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="S"/>
+                    <xs:enumeration value="E"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="natureProduitType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="FTTH_ACCES"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="segmentMarcheType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ENTREPRISE"/>
+                    <xs:enumeration value="GP"/>
+                    <xs:enumeration value="OPERATEUR"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="defectPrelocalizationType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="PTO"/>
+                    <xs:enumeration value="RACCO PALIER"/>
+                    <xs:enumeration value="PBO"/>
+                    <xs:enumeration value="PM-PBO"/>
+                    <xs:enumeration value="PM"/>
+                    <xs:enumeration value="HORIZONTALE RESEAU"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="codeReponseType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="OK"/>
+                    <xs:enumeration value="KO"/>
+                    <xs:enumeration value="NA"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="statutRendezVousType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="CREE"/>
+                    <xs:enumeration value="CONFIRME"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="natureReportType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="REPORT_RDV_RESERVE"/>
+                    <xs:enumeration value="REPORT_RDV_CONFIRME"/>
+                    <xs:enumeration value="NOUVEAU_RDV"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="RechercheCreneauxLibresReponse" nillable="true" type="tns:RechercheCreneauxLibresReponse"/>
+            <xs:element name="ConsultationRdvReponse" nillable="true" type="tns:ConsultationRdvReponse"/>
+            <xs:element name="ReportRDVReponse" nillable="true" type="tns:ReportRDVReponse"/>
+            <xs:element name="ReservationCreneauReponse" nillable="true" type="tns:ReservationCreneauReponse"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="reportRDVResponse">
+        <wsdl:part element="tns:ReportRDVReponse" name="ReportRDVReponse"/>
+    </wsdl:message>
+    <wsdl:message name="reportRDV">
+        <wsdl:part element="tns:ReportRDVRequete" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="reservationCreneau">
+        <wsdl:part element="tns:ReservationCreneauRequete" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="reservationCreneauResponse">
+        <wsdl:part element="tns:ReservationCreneauReponse" name="ReservationCreneauReponse"/>
+    </wsdl:message>
+    <wsdl:message name="rechercheCreneauxLibresResponse">
+        <wsdl:part element="tns:RechercheCreneauxLibresReponse" name="RechercheCreneauxLibresReponse"/>
+    </wsdl:message>
+    <wsdl:message name="rechercheCreneauxLibres">
+        <wsdl:part element="tns:RechercheCreneauxLibresRequete" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="consultationRdvResponse">
+        <wsdl:part element="tns:ConsultationRdvReponse" name="ConsultationRdvReponse"/>
+    </wsdl:message>
+    <wsdl:message name="consultationRdv">
+        <wsdl:part element="tns:ConsultationRdvRequete" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="InfoErreurTypeException">
+        <wsdl:part name="fault" element="tns:InfoErreurType"/>
+    </wsdl:message>
+    <wsdl:message name="EnteteTypeMessage">
+        <wsdl:part name="EnteteType" element="tns:EnteteType"/>
+    </wsdl:message>
+    <wsdl:portType name="PlanChargeFtthSav">
+        <wsdl:operation name="rechercheCreneauxLibres">
+            <wsdl:input message="tns:rechercheCreneauxLibres" name="rechercheCreneauxLibres"/>
+            <wsdl:output message="tns:rechercheCreneauxLibresResponse" name="rechercheCreneauxLibresResponse"/>
+            <wsdl:fault message="tns:InfoErreurTypeException" name="rdvErreur"/>
+        </wsdl:operation>
+        <wsdl:operation name="consultationRdv">
+            <wsdl:input message="tns:consultationRdv" name="consultationRdv"/>
+            <wsdl:output message="tns:consultationRdvResponse" name="consultationRdvResponse"/>
+            <wsdl:fault message="tns:InfoErreurTypeException" name="rdvErreur"/>
+        </wsdl:operation>
+        <wsdl:operation name="reportRDV">
+            <wsdl:input message="tns:reportRDV" name="reportRDV"/>
+            <wsdl:output message="tns:reportRDVResponse" name="reportRDVResponse"/>
+            <wsdl:fault message="tns:InfoErreurTypeException" name="rdvErreur"/>
+        </wsdl:operation>
+        <wsdl:operation name="reservationCreneau">
+            <wsdl:input message="tns:reservationCreneau" name="reservationCreneau"/>
+            <wsdl:output message="tns:reservationCreneauResponse" name="reservationCreneauResponse"/>
+            <wsdl:fault message="tns:InfoErreurTypeException" name="rdvErreur"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PlanChargeFtthSavServiceSoapBinding" type="tns:PlanChargeFtthSav">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="rechercheCreneauxLibres">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="rechercheCreneauxLibres">
+                <soap:body use="literal"/>
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="rechercheCreneauxLibresResponse">
+                <soap:body use="literal"/>
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="rdvErreur">
+                <soap:fault name="rdvErreur" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultationRdv">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="consultationRdv">
+                <soap:body use="literal"/>
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="consultationRdvResponse">
+                <soap:body use="literal"/>
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="rdvErreur">
+                <soap:fault name="rdvErreur" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="reportRDV">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="reportRDV">
+                <soap:body use="literal"/>
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="reportRDVResponse">
+                <soap:body use="literal"/>
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="rdvErreur">
+                <soap:fault name="rdvErreur" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="reservationCreneau">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="reservationCreneau">
+                <soap:body use="literal"/>
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="reservationCreneauResponse">
+                <soap:body use="literal"/>
+                <soap:header message="tns:EnteteTypeMessage" part="EnteteType" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="rdvErreur">
+                <soap:fault name="rdvErreur" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PlanChargeFtthSavService">
+        <wsdl:port binding="tns:PlanChargeFtthSavServiceSoapBinding" name="PlanChargeFtthSavPort">
+            <soap:address location="http://localhost:8080/sav-ftth/services/rdvFtthSav"/>
+        </wsdl:port>
+    </wsdl:service>
 </wsdl:definitions>
