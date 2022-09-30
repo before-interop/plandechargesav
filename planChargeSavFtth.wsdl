@@ -137,6 +137,9 @@
                     <xs:enumeration value="PM-PBO"/>
                     <xs:enumeration value="PM"/>
                     <xs:enumeration value="HORIZONTALE RESEAU"/>
+		    <xsd:enumeration value="PRDM"/>
+		    <xsd:enumeration value="PM-PRDM"/>
+		    <xsd:enumeration value="BRAM"/>
                 </xs:restriction>
             </xs:simpleType>
             <xs:simpleType name="codeReponseType">
